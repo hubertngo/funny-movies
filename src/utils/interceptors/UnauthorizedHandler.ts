@@ -1,26 +1,43 @@
-/*
- * Axios response interceptor
- * --------------------------
- * Redirect 401 response to logout page
- */
-const UnauthorizedHandler = async (error: any) => {
-  const { response } = error || {};
-  // const { status, config } = response;
-  // const { url } = config || {};
-  // if (status === 401) {
-  //   // For website only
-  //   if (window?.location?.href) {
-  //     // As logout page will call this API and it can also return a 401 response
-  //     if (url !== '/login') {
-  //       try {
-  //         window.location.href = `/login/?error=${status}`;
-  //       } catch (error) {
-  //         window.location.href = `/login/?error=500`;
-  //       }
-  //     }
-  //   }
-  // }
+import { message as Alert } from 'antd';
+import { getToken } from 'src/utils/auth-storage';
 
-  return response;
+export const UnauthorizedHandler = (error: any) => {
+  const { response } = error || {};
+  const message = response?.data?.error?.message || '';
+
+  if (message && message?.includes('Unknown "')) {
+    return;
+  }
+
+  switch (message) {
+    case 'Authorization Required':
+      break;
+
+    case '':
+      break;
+    case undefined:
+      break;
+    default:
+      Alert.error(response?.data?.error?.message);
+      break;
+  }
 };
-export default UnauthorizedHandler;
+
+export const SetSignedHeader = async (config: any) => {
+  config.headers = {
+    ...config.header,
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+
+  const authToken = getToken();
+
+  if (authToken) {
+    config.headers = {
+      ...config.headers,
+      Authorization: authToken,
+    };
+  }
+
+  return config;
+};

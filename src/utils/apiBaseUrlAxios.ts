@@ -1,7 +1,7 @@
 import axios from 'axios';
 import flow from 'lodash/flow';
 import ErrorResponseTransform from './interceptors/ErrorResponseTransform';
-import UnauthorizedHandler from './interceptors/UnauthorizedHandler';
+import { SetSignedHeader, UnauthorizedHandler } from './interceptors/UnauthorizedHandler';
 /**
  * Axios instance with specific baseURL setup
  * -------------------------------------------
@@ -12,6 +12,10 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 const apiBaseUrlAxios = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
+});
+
+apiBaseUrlAxios.interceptors.request.use(flow([SetSignedHeader]), function (error) {
+  return Promise.reject(error);
 });
 
 apiBaseUrlAxios.interceptors.response.use(flow([ErrorResponseTransform]), function (error) {

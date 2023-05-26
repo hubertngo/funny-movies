@@ -1,29 +1,20 @@
-import produce from 'immer';
-import create from 'zustand';
+import { create } from 'zustand';
 
-import { logout, userType } from 'src/apis/student';
+import { logout, UserType } from 'src/apis/users';
 
 type AuthStoreType = {
-	auth: userType;
-	setAuth: (userData?: userType) => void;
-	logout: () => void;
-	setWatchedVideo: () => void;
+  auth: UserType;
+  setAuth: (userData?: UserType) => void;
+  logout: () => void;
 };
 
 export const useAuthStore = create<AuthStoreType>((set, get) => ({
-	auth: {},
-	setAuth: (userData?: userType) => {
-		set({ auth: userData });
-	},
-	setWatchedVideo: () => {
-		set(
-			produce((state) => {
-				state.auth.watchedVideo = true;
-			}),
-		);
-	},
-	logout: async () => {
-		set({ auth: {} });
-		await logout();
-	},
+  auth: {},
+  setAuth: (userData?: UserType) => {
+    set({ auth: userData });
+  },
+  logout: async () => {
+    set({ auth: {} });
+    await logout();
+  },
 }));
