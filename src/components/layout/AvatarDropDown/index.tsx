@@ -1,7 +1,6 @@
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Dropdown, Modal } from 'antd';
-import { useRouter } from 'next/router';
 import React from 'react';
 import { RiLogoutBoxRFill } from 'react-icons/ri';
 
@@ -12,7 +11,6 @@ import { destroy } from 'src/utils/auth-storage';
 import classes from './style.module.less';
 
 export const AvatarDropDown = () => {
-  const router = useRouter();
   const { auth, logout } = useAuthStore();
 
   const handleLogout = React.useCallback(async () => {
@@ -25,14 +23,13 @@ export const AvatarDropDown = () => {
         } catch (err) {
         } finally {
           destroy();
-          router.push('/login');
         }
       },
       onCancel() {
         console.log('Cancel');
       },
     });
-  }, [router, logout]);
+  }, [logout]);
 
   const items: MenuProps['items'] = [
     {

@@ -1,11 +1,10 @@
-import { Button, Layout, Modal } from 'antd';
+import { Button, Layout } from 'antd';
 import Image from 'next/image';
 import React, { useCallback, useState } from 'react';
 
 import { useAuthStore } from 'src/stores/useAuthStore';
-import { destroy } from 'src/utils/auth-storage';
 
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { ShareAltOutlined } from '@ant-design/icons';
 import { LoginForm } from 'src/components/Forms/LoginForm';
 import { RegisterForm } from 'src/components/Forms/RegisterForm';
 import { ShareMovieForm } from 'src/components/Forms/ShareMovieForm';
@@ -25,24 +24,6 @@ export const HeaderSection: React.FC = () => {
     setIsShowLoginForm(true);
   };
 
-  const handleLogout = React.useCallback(async () => {
-    Modal.confirm({
-      title: 'Are you sure?',
-      icon: <ExclamationCircleOutlined />,
-      onOk: async () => {
-        try {
-          await logout();
-        } catch (err) {
-        } finally {
-          destroy();
-        }
-      },
-      onCancel() {
-        console.log('Cancel');
-      },
-    });
-  }, [logout]);
-
   const handleLoginSuccess = useCallback(() => {
     setIsShowLoginForm(false);
   }, []);
@@ -52,7 +33,7 @@ export const HeaderSection: React.FC = () => {
   }, []);
 
   return (
-    <Header className="bg-white shadow-sm fixed w-full z-10">
+    <Header className="bg-white shadow-sm fixed w-full z-10 p-0">
       <LoginForm isShow={isShowLoginForm} onClose={() => setIsShowLoginForm(false)} onSuccess={handleLoginSuccess} />
       <RegisterForm
         isShow={isShowRegisterForm}
@@ -64,13 +45,13 @@ export const HeaderSection: React.FC = () => {
         onClose={() => setIsShowShareMovieForm(false)}
         onSuccess={handleShareMovieSuccess}
       />
-      <div className="container mx-auto px-2">
+      <div className="md:container mx-auto px-2">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <div className="px-1">
               <Image src="/logo/logo.png" alt="logo" width={50} height={50} />
             </div>
-            <h1 className="text-sm">Funny Movies</h1>
+            <h1 className="text-sm md:text-xl lg:text-2xl">Funny Movies</h1>
           </div>
           {!auth?.id && (
             <div className="hidden md:block">
@@ -83,10 +64,22 @@ export const HeaderSection: React.FC = () => {
             </div>
           )}
           {auth?.id && (
-            <div className="hidden md:flex md:flex-row items-center">
-              <Button danger onClick={() => setIsShowShareMovieForm(true)} className="mr-4">
+            <div className="flex flex-row items-center">
+              <Button
+                icon={<ShareAltOutlined className="text-sm" />}
+                danger
+                onClick={() => setIsShowShareMovieForm(true)}
+                className="mr-3 hidden md:block"
+              >
                 Share a movie
               </Button>
+              <Button
+                danger
+                type="primary"
+                size="large"
+                shape="circle"
+                icon={<ShareAltOutlined className="text-lg" />} className="mr-3 md:hidden"
+              />
               <AvatarDropDown />
               <NotificationBtn />
             </div>

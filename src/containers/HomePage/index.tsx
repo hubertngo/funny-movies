@@ -1,4 +1,4 @@
-import { List, Skeleton } from 'antd';
+import { Divider, List, Skeleton } from 'antd';
 import classNames from 'classnames';
 import { useCallback, useEffect, useState } from 'react';
 import { Waypoint } from 'react-waypoint';
@@ -60,6 +60,7 @@ export const HomePageContainer = () => {
         <Waypoint onEnter={handleLoadMoreData} />
       )}
       {loadingMore && <Skeleton avatar paragraph={{ rows: 1 }} active />}
+      {data.length >= total && <Divider plain>It is all, nothing more 🤐</Divider>}
     </div>
   );
 };
