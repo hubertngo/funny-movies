@@ -1,4 +1,6 @@
+import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Modal } from 'antd';
+import Image from 'next/image';
 import { useCallback, useState } from 'react';
 
 import { login, loginPayload } from 'src/apis/users';
@@ -39,14 +41,7 @@ export const LoginForm = ({ isShow, onClose, onSuccess }: Props) => {
 
   return (
     <Modal
-      footer={[
-        <Button key="back" onClick={onClose}>
-          Cancel
-        </Button>,
-        <Button key="submit" type="primary" loading={loading} onClick={() => form.submit()}>
-          Submit
-        </Button>,
-      ]}
+      footer={null}
       open={isShow}
       onCancel={onClose}
     >
@@ -56,21 +51,43 @@ export const LoginForm = ({ isShow, onClose, onSuccess }: Props) => {
         onFinish={onFinish}
         autoComplete="off"
       >
+        <div className="text-center mb-5">
+          <Image src="/logo/logo.png" alt="Logo" width={80} height={80} />
+          <h1 className="text-xl">Welcome to Funny Movie!</h1>
+        </div>
         <Form.Item
-          label="Email"
           name="email"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[
+            {
+              type: 'email',
+              message: 'The input is not valid E-mail!',
+            },
+            {
+              required: true,
+              message: 'Please input your E-mail!',
+            },
+          ]}
         >
-          <Input />
+          <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
         </Form.Item>
-
         <Form.Item
-          label="Password"
           name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[
+            {
+              required: true,
+              message: 'Please input your Password!',
+            },
+          ]}
         >
-          <Input.Password />
+          <Input.Password
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder="Password"
+          />
         </Form.Item>
+        <Button type="primary" block htmlType="submit" className="login-form-button" loading={loading}>
+          Login
+        </Button>
       </Form>
     </Modal>
   );

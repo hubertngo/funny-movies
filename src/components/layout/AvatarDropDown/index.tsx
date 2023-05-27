@@ -1,8 +1,7 @@
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined, LogoutOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Dropdown, Modal } from 'antd';
+import { Button, Dropdown, Modal } from 'antd';
 import React from 'react';
-import { RiLogoutBoxRFill } from 'react-icons/ri';
 
 import Avatar from 'src/components/Avatar';
 import { useAuthStore } from 'src/stores/useAuthStore';
@@ -47,10 +46,9 @@ export const AvatarDropDown = () => {
     {
       key: '2',
       label: (
-        <a className={classes.item} onClick={handleLogout}>
-          <RiLogoutBoxRFill />
-          <span>Logout</span>
-        </a>
+        <Button icon={<LogoutOutlined />} danger type="primary" className="w-full" onClick={handleLogout}>
+          Logout
+        </Button>
       ),
     },
   ];

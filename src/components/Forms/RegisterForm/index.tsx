@@ -1,6 +1,8 @@
 import { Button, Form, Input, Modal, message } from 'antd';
+import Image from 'next/image';
 import { useCallback, useState } from 'react';
 
+import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 
 import { UserType, register } from 'src/apis/users';
 
@@ -30,14 +32,7 @@ export const RegisterForm = ({ isShow, onClose, onSuccess }: Props) => {
 
   return (
     <Modal
-      footer={[
-        <Button key="back" onClick={onClose}>
-          Cancel
-        </Button>,
-        <Button key="submit" type="primary" loading={loading} onClick={() => form.submit()}>
-          Submit
-        </Button>,
-      ]}
+      footer={null}
       okText="Submit"
       open={isShow}
       onCancel={onClose}
@@ -48,18 +43,20 @@ export const RegisterForm = ({ isShow, onClose, onSuccess }: Props) => {
         name="basic"
         autoComplete="off"
       >
+        <div className="text-center mb-5">
+          <Image src="/logo/logo.png" alt="Logo" width={80} height={80} />
+          <h1 className="text-xl">Welcome to Funny Movie!</h1>
+        </div>
         <Form.Item
           name="name"
-          label="Name"
           tooltip="What do you want others to call you?"
           rules={[{ required: true, message: 'Please input your name!', whitespace: true }]}
         >
-          <Input />
+          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Your name" />
         </Form.Item>
 
         <Form.Item
           name="email"
-          label="E-mail"
           rules={[
             {
               type: 'email',
@@ -71,12 +68,11 @@ export const RegisterForm = ({ isShow, onClose, onSuccess }: Props) => {
             },
           ]}
         >
-          <Input />
+          <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
         </Form.Item>
 
         <Form.Item
           name="password"
-          label="Password"
           rules={[
             {
               required: true,
@@ -85,12 +81,15 @@ export const RegisterForm = ({ isShow, onClose, onSuccess }: Props) => {
           ]}
           hasFeedback
         >
-          <Input.Password />
+          <Input.Password
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder="Password"
+          />
         </Form.Item>
 
         <Form.Item
           name="confirm"
-          label="Confirm Password"
           dependencies={['password']}
           hasFeedback
           rules={[
@@ -108,8 +107,15 @@ export const RegisterForm = ({ isShow, onClose, onSuccess }: Props) => {
             }),
           ]}
         >
-          <Input.Password />
+          <Input.Password
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder="Confirm Password"
+          />
         </Form.Item>
+        <Button type="primary" block htmlType="submit" className="login-form-button" loading={loading}>
+          Register a new account
+        </Button>
       </Form>
     </Modal>
   );

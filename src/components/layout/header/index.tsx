@@ -54,7 +54,7 @@ export const HeaderSection: React.FC = () => {
             <h1 className="text-sm md:text-xl lg:text-2xl">Funny Movies</h1>
           </div>
           {!auth?.id && (
-            <div className="hidden md:block">
+            <div className="flex flex-row items-center">
               <Button onClick={() => setIsShowLoginForm(true)} className="mr-4">
                 Log In
               </Button>
