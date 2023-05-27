@@ -4,7 +4,7 @@ import applyURIFilter from '../utils/apply-url-filter';
 const MODEL_PLURAL = 'users';
 
 export type UserType = {
-  fullName?: string;
+  name?: string;
   gender?: string;
   avatar?: string;
   id?: string;

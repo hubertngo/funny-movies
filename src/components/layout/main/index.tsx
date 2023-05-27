@@ -40,7 +40,7 @@ export const MainLayout = ({ children }: LayoutProps) => {
       </Head>
       <HeaderSection />
       <Content>
-        <div className="container mx-auto px-8 py-12">{children}</div>
+        <div className="container mx-auto py-12">{children}</div>
       </Content>
     </Layout>
   );

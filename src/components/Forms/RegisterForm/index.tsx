@@ -22,7 +22,7 @@ export const RegisterForm = ({ isShow, onClose, onSuccess }: Props) => {
       message.success('Your account is created successfully!');
       onSuccess();
     } catch {
-      // General error message is handled by middle ware
+      // Error message is handled by middleware
     } finally {
       setLoading(false);
     }

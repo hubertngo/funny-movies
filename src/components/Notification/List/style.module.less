@@ -1,0 +1,77 @@
+.contentWrapper {
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.title {
+    width: 400px;
+    display: flex;
+    padding: 10px 15px;
+    z-index: 1;
+    position: relative;
+    align-items: center;
+    border-bottom: 1px solid #e8e8e8;
+    justify-content: space-between;
+}
+
+.title h4 {
+    margin: 0;
+	display: flex;
+    align-items: center;
+	font-size: 16px;
+
+	svg {
+		width: 15px;
+		height: 15px;
+		margin-right: 10px;
+	}
+}
+
+.title a {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.notFound {
+    color: gray;
+    width: 400px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.notFound svg {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 767.98px) {
+	.title {
+		position: fixed;
+		z-index: 9999;
+		background-color: #fff;
+		border-bottom: 1px solid #e8e8e8;
+		width: 100%;
+		right: 0;
+		left: 0;
+		box-shadow: 0px 1px 3px 0px rgb(0 0 0 / 22%);
+	}
+	.contentWrapper {
+		width: 100%;
+		position: fixed;
+		z-index: 999;
+		background-color: #fff;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		height: auto;
+		top: 102px;
+		padding-top: 10px;
+	}
+	.notFound {
+		width: 100%;
+	}
+}

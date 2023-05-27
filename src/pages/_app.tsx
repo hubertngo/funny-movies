@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 
 import { MainLayout } from 'src/components/layout/main';
+import { withDataProvider } from 'src/hoc/withDataProvider';
 
 import 'src/styles/globals.css';
 
@@ -8,7 +9,7 @@ interface Props extends AppProps {
   Component: any;
 }
 
-export default function App({ Component, pageProps }: Props) {
+function App({ Component, pageProps }: Props) {
   const Layout = Component?.Layout || MainLayout;
 
   return (
@@ -17,3 +18,6 @@ export default function App({ Component, pageProps }: Props) {
     </Layout>
   );
 }
+
+
+export default withDataProvider(App);
