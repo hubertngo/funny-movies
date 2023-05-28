@@ -20,14 +20,14 @@ services:
   node-api:
     container_name: node-api
     command: yarn dev
-    build: ./server
+    build: ./server-node
     image: node-app
     environment:
       - MONGO_URL=mongodb://127.0.0.1:27017/FunnyMovie
     depends_on:
       - mongodb
     volumes:
-      - ./server:/app/server/src
+      - ./server-node:/app/server-node/src
     restart: always
     ports:
       - 3001:3001
