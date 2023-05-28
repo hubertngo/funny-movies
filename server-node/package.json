@@ -9,6 +9,7 @@
 		"start": "node .",
 		"dev": "nodemon ./src/server.js --exec babel-node",
 		"docker:dev": "docker-compose -f docker-compose.yml up",
+		"prod:pm2": "NODE_ENV=production pm2 start env/production.env.config.js",
 		"posttest": "npm run lint"
 	},
 	"dependencies": {

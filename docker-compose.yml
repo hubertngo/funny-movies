@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  mongodb:
+  mongodb-server:
     image: mongo:4.2.1-bionic
     restart: always
     volumes:
@@ -9,25 +9,23 @@ services:
     ports:
       - 27017:27017
     networks:
-      - node-network
+      - my-network
   mongo-express:
     image: mongo-express
     ports:
       - '8888:8081'
     restart: always
     networks:
-      - node-network
+      - my-network
     environment:
-      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_SERVER=mongodb-server
       - ME_CONFIG_MONGODB_PORT=27017
-    links:
-      - mongodb
     depends_on:
-      - mongodb
+      - mongodb-server
 
 volumes:
   db:
 
 networks:
-  node-network:
+  my-network:
     driver: bridge
