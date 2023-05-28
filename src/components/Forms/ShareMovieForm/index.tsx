@@ -2,6 +2,7 @@ import { Button, Form, Input, Modal, message } from 'antd';
 import { useCallback, useState } from 'react';
 
 import { VideoType, getList, shareVideo } from 'src/apis/videos';
+import { LIMIT } from 'src/constants/pagination';
 import { useVideoStore } from 'src/stores/useVideoStore';
 
 interface Props {
@@ -21,7 +22,7 @@ export const ShareMovieForm = ({ isShow, onClose, onSuccess }: Props) => {
         setLoading(true);
         if (videoLink) {
           await shareVideo(videoLink);
-          const newList = await getList({ include: 'creator', limit: 5 });
+          const newList = await getList({ include: 'creator', limit: LIMIT });
           setData(newList);
           message.success('You have shared the movie successfully!')
           form.resetFields();

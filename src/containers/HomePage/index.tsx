@@ -5,29 +5,29 @@ import { Waypoint } from 'react-waypoint';
 
 
 import { getList } from 'src/apis/videos';
+import { LIMIT } from 'src/constants/pagination';
 import { useVideoStore } from 'src/stores/useVideoStore';
 import { formatDate } from 'src/utils/format-time';
 import { truncate } from 'src/utils/string-utils';
 
 import classes from './styles.module.less';
 
-const LIMIT = 10;
-
 export const HomePageContainer = () => {
   const { data, total, skip, loadMoreData, setData } = useVideoStore();
-  const [loadingMore, setLoadingMore] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const handleLoadMoreData = useCallback(async () => {
     try {
-      setLoadingMore(true);
+      if (isLoadingMore) return;
+      setIsLoadingMore(true);
       const listVideo = await getList({ skip: skip + LIMIT, include: 'creator', limit: LIMIT });
       loadMoreData(listVideo);
     } catch {
       // error is handled by middleware
     } finally {
-      setLoadingMore(false);
+      setIsLoadingMore(false);
     }
-  }, [loadMoreData, skip]);
+  }, [loadMoreData, skip, isLoadingMore]);
 
   useEffect(() => {
     const getVideoList = async () => {
@@ -56,10 +56,10 @@ export const HomePageContainer = () => {
           </List.Item>
         )}
       />
-      {!loadingMore && data.length < total && (
+      {!isLoadingMore && data.length < total && (
         <Waypoint onEnter={handleLoadMoreData} />
       )}
-      {loadingMore && <Skeleton avatar paragraph={{ rows: 1 }} active />}
+      {isLoadingMore && <Skeleton avatar paragraph={{ rows: 1 }} active />}
       {data.length >= total && <Divider plain>It is all, nothing more 🤐</Divider>}
     </div>
   );
