@@ -46,7 +46,7 @@ cd funny-movies
 
 3. Configure Backend Settings:
 
-- Create a `.env` file inside the /server-node directory with the following values:
+- Create a `.env` file inside the `/server-node` directory with the following values:
 - Update the MONGO_URL if necessary
 
 ```bash
@@ -87,9 +87,32 @@ yarn docker:dev
 
 # Deployment
 
-1. Run Test Suite:
+## Run Test Suite:
 
-- Execute `yarn test` to run the test suite and ensure the application behaves as expected.
+To run the test suite, follow these steps:
 
-2. Deploy to Production:
-   Use `yarn docker:prod -d` to run the project on a production server.
+1. Navigate to the /server-node directory:
+
+```bash
+cd server-node
+```
+
+2. Start the server:
+
+```bash
+yarn start
+```
+
+3. Run the tests:
+
+```bash
+yarn test
+```
+
+## Deploy to Production:
+
+Run the project on a production server.
+
+```bash
+yarn docker:prod -d
+```
