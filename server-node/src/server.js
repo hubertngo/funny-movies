@@ -4,7 +4,8 @@ import boot from 'loopback-boot';
 
 dotenv.config();
 
-export const app = loopback();
+// eslint-disable-next-line no-multi-assign
+const app = module.exports = loopback();
 
 app.start = function () {
   // start the web server
