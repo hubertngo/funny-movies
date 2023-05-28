@@ -1,6 +1,6 @@
 import produce from 'immer';
 import { listResponse } from 'src/apis/notification';
-import create from 'zustand';
+import { create } from 'zustand';
 
 import { NotificationType } from 'src/apis/notification';
 

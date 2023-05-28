@@ -7,8 +7,7 @@ services:
       context: ./
       dockerfile: DockerFile.dev
     environment:
-      ENV_VARIABLE: ${ENV_VARIABLE}
-      NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+      NEXT_PUBLIC_API_URL: http://localhost:3001/api/v1
     volumes:
       - ./src:/app/src
       - ./public:/app/public

@@ -6,52 +6,26 @@ services:
     build:
       context: ./
       dockerfile: DockerFile.prod
-    environment:
-      ENV_VARIABLE: ${ENV_VARIABLE}
-      NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+      args:
+        NEXT_PUBLIC_API_URL: http://13.212.82.60:3001/api/v1
     restart: always
     ports:
       - 3000:3000
     networks:
-      - my_network
-  node-api:
-    container_name: node-api-prod
-    command: yarn start
-    build: ./server
-    image: node-app
-    environment:
-      - mongodb://127.0.0.1:27017/FunnyMovie
-    depends_on:
-      - mongodb
-    volumes:
-      - ./src:/app/src
-    restart: always
-    ports:
-      - 3001:3001
-    networks:
-      - my_network
-  mongodb:
-    image: mongo:4.2.1-bionic
-    restart: always
-    volumes:
-      - db:/data/db
-    networks:
-      - my_network
-  mongo-express-prod:
-    image: mongo-express
-    container_name: mongo-express-admin
-    ports:
-      - '8888:8081'
-    restart: always
-    depends_on:
-      - mongodb
-    networks:
-      - my_network
-
-  # Add more containers below (nginx, postgres, etc.)
-
-# Define a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
-networks:
-  my_network:
-    external: true
+      - node-network
+  # node-api-prod:
+  #   container_name: node-api-prod
+  #   command: yarn start
+  #   build: ./server-node
+  #   image: node-app
+  #   environment:
+  #     - mongodb://127.0.0.1:27017/FunnyMovie
+  #   depends_on:
+  #     - mongodb
+  #   volumes:
+  #     - ./server-node:/app/server-node/src
+  #   restart: always
+  #   ports:
+  #     - 3001:3001
+  #   networks:
+  #     - node-network
