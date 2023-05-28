@@ -57,6 +57,12 @@ PORT=3001
 MONGO_URL='mongodb://127.0.0.1:27017/FunnyMovie'
 ```
 
+- if you want to restore the existing db, run this command
+
+```
+docker-compose exec -T mongodb-server sh -c "mongorestore --drop --gzip --archive" < db.dump
+```
+
 4. Configure Frontend Settings;
 
 - Create a `.env` file in the root folder with the following values:
