@@ -22,14 +22,16 @@ services:
     command: yarn dev
     build: ./server-node
     image: node-app
-    environment:
-      - MONGO_URL=mongodb://127.0.0.1:27017/FunnyMovie
-    depends_on:
-      - mongodb
     volumes:
       - ./server-node:/app/server-node/src
-    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_PORT=27017
+      - MONGO_URL=mongodb://127.0.0.1:27017/FunnyMovie
     ports:
       - 3001:3001
+    restart: always
     networks:
       - node-network
+    depends_on:
+      - mongodb
