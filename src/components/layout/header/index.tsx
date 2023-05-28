@@ -17,7 +17,7 @@ export const HeaderSection: React.FC = () => {
   const [isShowLoginForm, setIsShowLoginForm] = useState(false);
   const [isShowRegisterForm, setIsShowRegisterForm] = useState(false);
   const [isShowShareMovieForm, setIsShowShareMovieForm] = useState(false);
-  const { auth, logout } = useAuthStore();
+  const { auth } = useAuthStore();
 
   const handleFinishRegister = () => {
     setIsShowRegisterForm(false);
@@ -78,7 +78,9 @@ export const HeaderSection: React.FC = () => {
                 type="primary"
                 size="large"
                 shape="circle"
-                icon={<ShareAltOutlined className="text-lg" />} className="mr-3 md:hidden"
+                onClick={() => setIsShowShareMovieForm(true)}
+                icon={<ShareAltOutlined className="text-lg" />}
+                className="mr-3 md:hidden"
               />
               <AvatarDropDown />
               <NotificationBtn />
