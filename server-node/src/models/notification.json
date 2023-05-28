@@ -1,0 +1,60 @@
+{
+	"name": "Notification",
+	"plural": "notifications",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"scope": {
+		"order": "createdAt DESC"
+	},
+	"properties": {
+		"createdAt": {
+			"type": "date",
+			"defaultFn": "now",
+			"index": true
+		},
+		"updatedAt": {
+			"type": "date",
+			"defaultFn": "now",
+			"index": true
+		},
+		"isRead": {
+			"type": "boolean",
+			"default": false,
+			"index": true
+		}
+	},
+	"validations": [],
+	"relations": {
+    "video": {
+      "type": "belongsTo",
+			"model": "Video",
+			"foreignKey": "videoId"
+    },
+		"creator": {
+			"type": "belongsTo",
+			"model": "user",
+			"foreignKey": "creatorId"
+		},
+    "receiver": {
+			"type": "belongsTo",
+			"model": "user",
+			"foreignKey": "receiverId"
+		}
+	},
+	"acls": [
+    {
+			"principalType": "ROLE",
+			"principalId": "$everyone",
+			"permission": "DENY"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "ALLOW"
+		}
+  ],
+	"methods": {}
+}

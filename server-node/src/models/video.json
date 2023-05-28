@@ -1,0 +1,89 @@
+{
+	"name": "Video",
+	"plural": "videos",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"scope": {
+		"order": "createdAt DESC"
+	},
+	"properties": {
+		"createdAt": {
+			"type": "date",
+			"defaultFn": "now",
+			"index": true
+		},
+		"updatedAt": {
+			"type": "date",
+			"defaultFn": "now",
+			"index": true
+		},
+		"title": "string",
+		"videoLink": "string",
+    "videoId": "string",
+    "description": "string",
+    "thumbnails": [],
+    "embed": {
+      "type": "object"
+    }
+	},
+	"validations": [],
+	"relations": {
+    "creator": {
+			"type": "belongsTo",
+			"model": "user",
+			"foreignKey": "creatorId"
+		}
+	},
+	"acls": [
+		{
+			"principalType": "ROLE",
+			"principalId": "$everyone",
+			"permission": "DENY"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "ALLOW"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "$everyone",
+			"permission": "ALLOW",
+			"property": "find"
+		}
+	],
+	"methods": {
+    "shareVideo": {
+			"accepts": [
+				{
+					"arg": "req",
+					"type": "object",
+					"required": true,
+					"http": {
+						"source": "req"
+					}
+				},
+        {
+					"arg": "videoLink",
+					"type": "string",
+					"required": true
+				}
+			],
+			"returns": {
+				"arg": "result",
+				"type": "object",
+				"root": true
+			},
+			"description": "User check in by access token",
+			"http": [
+				{
+					"path": "/shareVideo",
+					"verb": "post"
+				}
+			]
+		}
+  }
+}

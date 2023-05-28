@@ -1,0 +1,50 @@
+{
+	"parser": "babel-eslint",
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"extends": [
+		"airbnb-base"
+	],
+	"plugins": [
+		"import"
+	],
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [
+					".js",
+					".android.js",
+					".ios.js",
+					".jsx",
+					".json"
+				]
+			},
+			"babel-module": {
+				"root": [
+					"./"
+				],
+				"alias": {
+					"src": "./src",
+					"assets": "./assets"
+				}
+			}
+		}
+	},
+	"rules": {
+    "indent": ["error", 2],
+    "import/prefer-default-export": "off",
+    "prefer-destructuring": "off",
+    "default-param-last": "off",
+    "consistent-return": "off",
+    "no-param-reassign": "off",
+    "func-names": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-import-module-exports": "off"
+	},
+	"globals": {
+		"fetch": true,
+		"__DEV__": true,
+		"FormData": true
+	}
+}

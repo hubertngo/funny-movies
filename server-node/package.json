@@ -1,0 +1,51 @@
+{
+	"name": "funny-movies-backend-nodejs",
+	"version": "1.0.0",
+	"engines": {
+		"node": ">=6"
+	},
+	"scripts": {
+		"lint": "eslint .",
+		"start": "node .",
+		"dev": "nodemon ./src/server.js --exec babel-node",
+		"docker:dev": "docker-compose -f docker-compose.yml up",
+		"posttest": "npm run lint"
+	},
+	"dependencies": {
+		"async": "^3.2.4",
+		"compression": "^1.0.3",
+		"connect-mongo": "^4.6.0",
+		"cors": "^2.5.2",
+		"dotenv": "^16.0.3",
+		"event-stream": "4.0.1",
+		"helmet": "^3.10.0",
+		"loopback": "^3.22.0",
+		"loopback-boot": "^2.6.5",
+		"loopback-component-explorer": "^6.2.0",
+		"loopback-connector-mongodb": "5.5.0",
+		"serve-favicon": "^2.0.1",
+		"strong-error-handler": "^4.0.0",
+		"ytdl-core": "^4.11.4"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.16.0",
+		"@babel/core": "^7.22.1",
+		"@babel/node": "^7.22.1",
+		"@babel/plugin-proposal-optional-chaining": "^7.16.0",
+		"@babel/preset-env": "^7.16.0",
+		"babel-eslint": "^10.1.0",
+		"babel-plugin-module-resolver": "^4.1.0",
+		"eslint": "7.32.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-loopback": "^13.1.0",
+		"eslint-import-resolver-babel-module": "^5.3.1",
+		"eslint-plugin-import": "^2.25.3",
+		"nodemon": "^2.0.15"
+	},
+	"repository": {
+		"type": "",
+		"url": ""
+	},
+	"license": "UNLICENSED",
+	"description": "funny-movies-backend-nodejs"
+}

@@ -1,0 +1,188 @@
+{
+	"name": "user",
+	"plural": "users",
+	"base": "User",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true,
+		"resetPasswordTokenTTL": 1209600,
+		"ttl": 31556926
+	},
+	"scope": {
+		"order": "createdAt DESC"
+	},
+	"properties": {
+		"createdAt": {
+			"type": "date",
+			"defaultFn": "now",
+			"index": true
+		},
+		"updatedAt": {
+			"type": "date",
+			"defaultFn": "now",
+			"index": true
+		},
+		"sentEmailInvite": {
+			"type": "boolean",
+			"default": false
+		},
+		"status": {
+			"type": "string",
+			"default": "active"
+		},
+		"avatar": {
+			"type": "string"
+		},
+		"name": {
+			"type": "string"
+		},
+		"gender": {
+			"type": "string"
+		},
+		"birthDate": {
+			"type": "date"
+		},
+		"phone": {
+			"type": "string"
+		},
+		"email": {
+			"type": "string",
+			"index": true
+		},
+		"address": {
+			"type": "string"
+		},
+		"lastCheckIn": {
+			"type": "date",
+			"defaultFn": "now"
+		}
+	},
+	"validations": [],
+	"relations": {},
+	"acls": [
+		{
+			"principalType": "ROLE",
+			"principalId": "$everyone",
+			"permission": "DENY"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "$everyone",
+			"permission": "ALLOW",
+			"property": "login"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "$everyone",
+			"permission": "ALLOW",
+			"property": "findById"
+		},
+		{
+			"accessType": "EXECUTE",
+			"principalType": "ROLE",
+			"principalId": "$everyone",
+			"permission": "ALLOW",
+			"property": "verify"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "$everyone",
+			"permission": "ALLOW",
+			"property": "confirm"
+		},
+		{
+			"accessType": "EXECUTE",
+			"principalType": "ROLE",
+			"principalId": "$everyone",
+			"permission": "ALLOW",
+			"property": "resetPassword"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "$everyone",
+			"permission": "ALLOW",
+			"property": "exists"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "$everyone",
+			"permission": "ALLOW",
+			"property": "count"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "$owner",
+			"permission": "ALLOW",
+			"property": "patchAttributes"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "$owner",
+			"permission": "DENY",
+			"property": "replaceById"
+		},
+		{
+			"accessType": "EXECUTE",
+			"principalType": "ROLE",
+			"principalId": "$owner",
+			"permission": "ALLOW",
+			"property": "changePassword"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "admin",
+			"permission": "ALLOW"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "admin",
+			"permission": "DENY",
+			"property": "deleteById"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "ALLOW",
+			"property": "logout"
+		},
+		{
+			"accessType": "EXECUTE",
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "ALLOW",
+			"property": "setPassword"
+		},
+		{
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "ALLOW",
+			"property": "checkIn"
+		}
+	],
+	"methods": {
+		"checkIn": {
+			"accepts": [
+				{
+					"arg": "req",
+					"type": "object",
+					"required": true,
+					"http": {
+						"source": "req"
+					}
+				}
+			],
+			"returns": {
+				"arg": "result",
+				"type": "object",
+				"root": true
+			},
+			"description": "User check in by access token",
+			"http": [
+				{
+					"path": "/checkin",
+					"verb": "get"
+				}
+			]
+		}
+	}
+}
