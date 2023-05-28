@@ -1,6 +1,4 @@
 const request = require('supertest');
-const httpStatus = require('http-status');
-
 
 const { API_URL } = require('../constant');
 

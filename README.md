@@ -42,7 +42,7 @@ cd funny-movies
 
 2. Install Docker:
 
-- Install Docker by following the instructions in this Docker Installation Guide.
+- Install Docker by following the instructions in this [Docker Installation Guide](https://docs.docker.com/engine/install/ubuntu/).
 
 3. Configure Backend Settings:
 
