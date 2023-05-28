@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  ipp-eco:
+  funny-movie-frontend-prod:
     container_name: funny-movie-web-prod
     build:
       context: ./
@@ -12,6 +12,39 @@ services:
     restart: always
     ports:
       - 3000:3000
+    networks:
+      - my_network
+  node-api:
+    container_name: node-api-prod
+    command: yarn start
+    build: ./server
+    image: node-app
+    environment:
+      - mongodb://127.0.0.1:27017/FunnyMovie
+    depends_on:
+      - mongodb
+    volumes:
+      - ./src:/app/src
+    restart: always
+    ports:
+      - 3001:3001
+    networks:
+      - my_network
+  mongodb:
+    image: mongo:4.2.1-bionic
+    restart: always
+    volumes:
+      - db:/data/db
+    networks:
+      - my_network
+  mongo-express-prod:
+    image: mongo-express
+    container_name: mongo-express-admin
+    ports:
+      - '8888:8081'
+    restart: always
+    depends_on:
+      - mongodb
     networks:
       - my_network
 

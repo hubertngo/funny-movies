@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  ipp-eco:
+  funny-movie-frontend:
     container_name: funny-movie-web
     build:
       context: ./
@@ -16,12 +16,20 @@ services:
     ports:
       - 3000:3000
     networks:
-      - my_network
-
-  # Add more containers below (nginx, postgres, etc.)
-
-# Define a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
-networks:
-  my_network:
-    external: true
+      - node-network
+  node-api:
+    container_name: node-api
+    command: yarn dev
+    build: ./server
+    image: node-app
+    environment:
+      - MONGO_URL=mongodb://127.0.0.1:27017/FunnyMovie
+    depends_on:
+      - mongodb
+    volumes:
+      - ./server:/app/server/src
+    restart: always
+    ports:
+      - 3001:3001
+    networks:
+      - node-network
