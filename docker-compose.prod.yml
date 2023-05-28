@@ -12,20 +12,20 @@ services:
     ports:
       - 3000:3000
     networks:
-      - node-network
-  # node-api-prod:
-  #   container_name: node-api-prod
-  #   command: yarn start
-  #   build: ./server-node
-  #   image: node-app
-  #   environment:
-  #     - mongodb://127.0.0.1:27017/FunnyMovie
-  #   depends_on:
-  #     - mongodb
-  #   volumes:
-  #     - ./server-node:/app/server-node/src
-  #   restart: always
-  #   ports:
-  #     - 3001:3001
-  #   networks:
-  #     - node-network
+      - my-network
+  node-server:
+    image: node-server
+    container_name: node-server
+    command: yarn start
+    build: ./server-node
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb-server
+      - ME_CONFIG_MONGODB_PORT=27017
+      - MONGO_URL=mongodb://mongodb-server:27017/FunnyMovie
+    ports:
+      - 3001:3001
+    restart: always
+    networks:
+      - my-network
+    depends_on:
+      - mongodb-server

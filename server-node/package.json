@@ -6,10 +6,7 @@
 	},
 	"scripts": {
 		"lint": "eslint .",
-		"start": "node .",
-		"dev": "nodemon ./src/server.js --exec babel-node",
-		"docker:dev": "docker-compose -f docker-compose.yml up",
-		"prod:pm2": "NODE_ENV=production pm2 start env/production.env.config.js",
+		"start": "nodemon ./src/server.js --exec babel-node",
 		"posttest": "npm run lint"
 	},
 	"dependencies": {
