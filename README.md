@@ -12,6 +12,8 @@ The project aims to develop a web application with user registration and login f
 
 4. Real-Time Notifications for New Video Shares: When a user shares a new video, other logged-in users will receive real-time notifications about the newly shared video.
 
+Demo link: [Live Preview](http://13.212.82.60:3000/)
+
 # Core technologies
 
 ## Backend
@@ -38,12 +40,14 @@ git clone https://github.com/hubertngo/funny-movies.git
 cd funny-movies
 ```
 
-2. Install Docker from this link: https://docs.docker.com/engine/install/ubuntu/
+2. Install Docker:
+
+- Install Docker by following the instructions in this Docker Installation Guide.
 
 3. Configure Backend Settings:
 
-- create `.env` file inside `/server-node` with below values:
-- update MONGO_URL if necessary
+- Create a `.env` file inside the /server-node directory with the following values:
+- Update the MONGO_URL if necessary
 
 ```bash
 # Port number
@@ -55,8 +59,8 @@ MONGO_URL='mongodb://127.0.0.1:27017/FunnyMovie'
 
 4. Configure Frontend Settings;
 
-- create `.env` file in root folder with the below values:
-- update MONGO_URL if necessary
+- Create a `.env` file in the root folder with the following values:
+- update the MONGO_URL if necessary
 
 ```bash
 # Port number
@@ -68,7 +72,7 @@ NEXT_PUBLIC_API_URL='http://localhost:3001/api/v1'
 
 5. Start the Project
 
-- this command will setup all the dependencies of the project including database, tools and environment variables. This also offer hot refresh every time the source code has updates.
+Use the following command to set up all project dependencies, including the database, tools, and environment variables. The command enables hot refresh for automatic updates.
 
 ```bash
 yarn docker:dev
@@ -77,11 +81,15 @@ yarn docker:dev
 6. Access the Application
 
 - Open a web browser and visit http://localhost:3000 to access the application.
-- API will available at http://localhost:3001/api/v1
-- API Explorer: http://localhost:3001/explorer
-- To check the database http://localhost:8888
+- The API will be available at http://localhost:3001/api/v1.
+- Explore the API using the API Explorer at http://localhost:3001/explorer.
+- To access the database, visit http://localhost:8888.
 
 # Deployment
 
-1. USE `yarn test` to run the test suite
-2.
+1. Run Test Suite:
+
+- Execute `yarn test` to run the test suite and ensure the application behaves as expected.
+
+2. Deploy to Production:
+   Use `yarn docker:prod -d` to run the project on a production server.
