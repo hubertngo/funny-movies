@@ -104,6 +104,7 @@ yarn start
 ```
 
 3. Run the tests:
+   Open a new terminal with the same directory and run
 
 ```bash
 yarn test
