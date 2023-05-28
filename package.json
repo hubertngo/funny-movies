@@ -4,9 +4,10 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
+		"build": "NODE_ENV=production env-cmd -f .env.production --fallback --silent next build",
+		"prod:pm2": "NODE_ENV=production pm2 start npm --name \"funny-web\" -- start",
 		"docker:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
 		"docker:prod": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up"
 	},
