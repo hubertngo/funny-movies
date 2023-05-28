@@ -1,38 +1,87 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Overview:
 
-## Getting Started
+The project aims to develop a web application with user registration and login functionalities, allowing users to share YouTube videos and view a list of shared videos. Additionally, real-time notifications will be implemented to notify logged-in users about newly shared videos.
 
-First, run the development server:
+## Key Features:
+
+1. User Registration and Login: The web application will provide a user registration and login system.
+
+2. Sharing YouTube Videos: Authenticated users will have the ability to share YouTube videos within the application.
+
+3. Viewing a List of Shared Videos: Users will have access to a comprehensive list of shared videos. This list will display the shared videos, including their titles and the names of the users who shared them.
+
+4. Real-Time Notifications for New Video Shares: When a user shares a new video, other logged-in users will receive real-time notifications about the newly shared video.
+
+# Core technologies
+
+## Backend
+
+1. Node JS (recommended using LTS version 18.12.1)
+2. Docker (version > 20.10)
+3. MongoDB (version 4.2.1)
+4. Loopback 3 (framework)
+
+## Frontend
+
+1. React (version 18.2.0)
+2. Next.js (version 13.2.4)
+3. Tailwindcss
+4. Ant Design (antd.design)
+5. Zustand (state management)
+
+# Installation & Configuration
+
+1. Clone the Repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+git clone https://github.com/hubertngo/funny-movies.git
+cd funny-movies
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install Docker from this link: https://docs.docker.com/engine/install/ubuntu/
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+3. Configure Backend Settings:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- create `.env` file inside `/server-node` with below values:
+- update MONGO_URL if necessary
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+# Port number
+PORT=3001
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Mongo connection string
+MONGO_URL='mongodb://127.0.0.1:27017/FunnyMovie'
+```
 
-## Learn More
+4. Configure Frontend Settings;
 
-To learn more about Next.js, take a look at the following resources:
+- create `.env` file in root folder with the below values:
+- update MONGO_URL if necessary
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Port number
+PORT=3000
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# API URL
+NEXT_PUBLIC_API_URL='http://localhost:3001/api/v1'
+```
 
-## Deploy on Vercel
+5. Start the Project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- this command will setup all the dependencies of the project including database, tools and environment variables. This also offer hot refresh every time the source code has updates.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+yarn docker:dev
+```
+
+6. Access the Application
+
+- Open a web browser and visit http://localhost:3000 to access the application.
+- API will available at http://localhost:3001/api/v1
+- API Explorer: http://localhost:3001/explorer
+- To check the database http://localhost:8888
+
+# Deployment
+
+1. USE `yarn test` to run the test suite
+2.
